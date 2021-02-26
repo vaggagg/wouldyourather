@@ -20,6 +20,11 @@ body{
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+.AddQuestionContainer { width:80%; margin: 0 auto; }
+
+.AddQuestionContainer .input .row { margin-left: 10px;}
+.AddQuestionContainer .button-container { width:400px;}
+.Answered-Question { text-align: left; }
 .Button{  width:60%;  height:50px;    text-align:center;  background-color:black;  color:#fff;  border-radius:30px;}
 .Button.redBg{  background-color:#aa1111;  color:#00ffff;}
 .Button.redBg:hover{  background-color:#6e0505;}
@@ -48,18 +53,42 @@ body{
 .mainDashboard { overflow: auto; width: 90%; height:500px; background-color: white; left: 0; right: 0;bottom: 0; margin: auto; }
 .mainDashboard .Title { text-align: center; font-weight: 700; color: black; font-size: 16px; }
 .header img {  background-color: transparent; margin:auto 0; width: 200px;}
-.diagram { width: 100%; height:20px; display: flex; margin: 0 auto;}
-.diagram .OptionOne{  background-color: #6b0000; text-align: center;}
-.diagram .OptionTwo {  background-color: #826713; text-align: center;}
-.Question-box { border: 2px solid gray; width:90%; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; }
+.diagram { width: 100%; float:left;  height:20px; display: flex; margin: 0 auto; color: white;}
+.diagram.hovered { width: 100%; transition: width 2s; }
+.Unanswered .diagram.hovered { width: 100%; transition: width 2s; }
+.diagram.notHovered { width: 0; }
+.diagram .OptionOne{  background-color: #6b0000; width:0; font-weight: 400;}
+.diagram .OptionTwo {  background-color: #826713; width: 0; font-weight: 400;}
+.Question-box { width: 50%; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; }
+.Subtitle { padding-bottom: 15px; padding-top: 15px; }
+.AddQuestionContainer .Title { text-align:center; font-weight: 700; font-size:22px;  }
+@media screen and (max-width: 1400px) {
+  .Question-box { width:60%; }
+}
+@media screen and (max-width: 1200px) {
+  .Question-box { width:65%; }
+}
+@media screen and (max-width: 1000px) {
+  .Question-box { width:80%; }
+}
+@media screen and (max-width: 800px) {
+  .Question-box { width:90%; }
+}
+@media screen and (max-width: 500px) {
+  .Question-box { width:100%; }
+}
+
 .Question { width: 100%; margin: 0 auto; display: flex; }
 .Question .Or { font-size: 15px; width: 20%;  text-align: center;}
-.Question .OptionOne { text-align: left; color: #826713; }
-.Question .OptionTwo { text-align: right; color: #6b0000; }
-.Question .OptionOne,.OptionTwo { width: 40%; font-weight: 700;  }
+.Question .OptionOne { text-align: right; color: #6b0000; }
+.Question .OptionOne:hover { background-color: #6b0000; color: white; cursor: pointer; }
+.Question .OptionTwo:hover { background-color: #826713; color: white; cursor: pointer;}
+.Question .OptionTwo { text-align: left; color: #826713; }
+.Question .OptionOne,.OptionTwo { width: 40%;}
 .Titles {display: flex; }
 .Titles a { text-decoration:none; padding: 10px; width: 20%; background-color: #dedede; font-size: 15px; text-align: center; border-bottom: 3px solid black; }
 .Titles a.selected { border-right: 2px solid black; border-left: 2px solid black; border-top: 2px solid black; border-bottom:none; background-color: white;}
+.wouldRatherBe{ font-size: 22px; text-align: center; font-weight: 700;}
 
 
 #Warning{

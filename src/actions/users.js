@@ -7,6 +7,7 @@ export const RECEIVE_USERS ='RECEIVE_USERS'
 export const ADD_USER = 'ADD_USER'
 export const SIGN_IN = 'SIGN_IN'
 export const FAILED_SIGN_IN='FAILED_SIGN_IN'
+export const ANSWER_QUESTION_USER='ANSWER_QUESTION_USER'
 
 
 export function receiveUsers(users){
@@ -20,6 +21,12 @@ export function addUser(user){
         type: ADD_USER,
         user
     }
+}
+export function AnswerQuestionUser(user){
+  return {
+      type: ANSWER_QUESTION_USER,
+      user
+  }
 }
 
 export function handleAddUser(id, password){

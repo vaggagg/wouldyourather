@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import Home from './Home.js';
 import Questions from './Questions.js';
 import MyProfile from './MyProfile.js';
+import AddQuestions from './AddQuestions.js';
 import {
     NavLink,
     BrowserRouter as Router,
     Switch,
     Route
   } from "react-router-dom";
-
 class Dashboard extends React.Component {
 
 
@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
                     Leaderboard
                 </NavLink>
                 <NavLink to="../Dashboard/Questions" activeClassName="selected">
-                    Questions
+                     Unanswered Questions
                 </NavLink>
                 <NavLink to="../Dashboard/addQuestions" activeClassName="selected">
                     Add Questions
@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
                         <Questions />
                     </Route>
                     <Route path='/Dashboard/addQuestions'>
-                        
+                        <AddQuestions />
                     </Route>
                     <Route path='/Dashboard/MyProfile'>
                         <MyProfile />

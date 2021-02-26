@@ -34,7 +34,44 @@ let users = {
       "6ni6ok3ym7mf1p33lnez": 'optionTwo'
     },
     questions: ['6ni6ok3ym7mf1p33lnez', 'xj352vofupe1dqz9emx13r'],
-  }
+  },
+  kate: {
+    id: 'Kate',
+    name: 'kate',
+    password:'1234',
+    avatarURL:"" ,
+    answers: {
+      "xj352vofupe1dqz9emx13r": 'optionOne',
+      "vthrdm985a262al8qx3do": 'optionTwo',
+      "6ni6ok3ym7mf1p33lnez": 'optionTwo'
+    },
+    questions: [],
+  },
+  sarah: {
+    id: 'Sarah',
+    name: 'Sarah',
+    password:'1234',
+    avatarURL:"" ,
+    answers: {
+      "xj352vofupe1dqz9emx13r": 'optionOne',
+      "vthrdm985a262al8qx3do": 'optionTwo',
+      "6ni6ok3ym7mf1p33lnez": 'optionTwo'
+    },
+    questions: [],
+  },
+  loltest: {
+    id: 'LOLtest',
+    name: 'LolTest',
+    password:'1234',
+    avatarURL:"" ,
+    answers: {
+      "xj352vofupe1dqz9emx13r": 'optionOne',
+      "vthrdm985a262al8qx3do": 'optionTwo',
+      "6ni6ok3ym7mf1p33lnez": 'optionTwo'
+    },
+    questions: [],
+  },
+
 }
 
 let questions = {
@@ -56,7 +93,7 @@ let questions = {
     author: 'johndoe',
     timestamp: 1468479767190,
     optionOne: {
-      votes: [],
+      votes: ['sarah'],
       text: 'become a superhero',
     },
     optionTwo: {
@@ -73,7 +110,7 @@ let questions = {
       text: 'be telekinetic',
     },
     optionTwo: {
-      votes: ['sarahedo'],
+      votes: ['sarahedo','sarah'],
       text: 'be telepathic'
     }
   },
@@ -82,11 +119,11 @@ let questions = {
     author: 'tylermcginnis',
     timestamp: 1482579767190,
     optionOne: {
-      votes: [],
+      votes: ['sarah'],
       text: 'be a front-end developer',
     },
     optionTwo: {
-      votes: ['sarahedo'],
+      votes: ['sarah'],
       text: 'be a back-end developer'
     }
   },
@@ -95,7 +132,7 @@ let questions = {
     author: 'tylermcginnis',
     timestamp: 1489579767190,
     optionOne: {
-      votes: ['tylermcginnis'],
+      votes: ['tylermcginnis','testlol','kate'],
       text: 'find $50 yourself',
     },
     optionTwo: {
@@ -108,7 +145,7 @@ let questions = {
     author: 'johndoe',
     timestamp: 1493579767190,
     optionOne: {
-      votes: ['johndoe'],
+      votes: ['johndoe','kate'],
       text: 'write JavaScript',
     },
     optionTwo: {
@@ -174,7 +211,7 @@ export function _saveQuestion (question) {
   })
 }
 
-export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
+export function _saveQuestionAnswer ( authedUser, qid, answer ) {
   return new Promise((res, rej) => {
     setTimeout(() => {
       users = {
@@ -199,7 +236,7 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
         }
       }
 
-      res()
+      res([users,questions])
     }, 500)
   })
 }

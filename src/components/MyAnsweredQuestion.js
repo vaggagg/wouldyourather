@@ -10,20 +10,16 @@ class MyAnsweredQuestion extends React.Component{
     const  {optionOne,optionTwo,total} = this.props.percentage;
     const isZeroOptionOne = optionOne == 0 ;
     const isZeroOptionTwo = optionTwo == 0 ;
-    const widthOfOptionOne = {
-      width: optionOne/total * 100 + '%'
-    }
-    const widthOfOptionTwo = {
-      width: optionTwo/total * 100 + '%'
-    }
+    const widthOfOptionOne = { width: optionOne/total * 100 + '%'}
+    const widthOfOptionTwo = { width: optionTwo/total * 100 + '%'}
+    const widthOfDiagram = this.state.display ? 'hovered' : 'notHovered'
    
-    
-    const diagram = <div class='diagram' id={id}>
+    const diagram = <div class={ 'diagram '+ widthOfDiagram} id={id}>
                       <div class="OptionOne" style={widthOfOptionOne}>
-                       {!isZeroOptionOne &&question.optionOne.text +'('+optionOne+')' }
+                       {!isZeroOptionOne &&question.optionOne.text +`(${optionOne}/${total} ${(optionOne/total*100).toFixed(2)}%)` }
                       </div>
                       <div class="OptionTwo" style={widthOfOptionTwo}>
-                      {!isZeroOptionTwo && question.optionTwo.text +'('+optionTwo+')'}
+                      {!isZeroOptionTwo && question.optionTwo.text +`(${optionTwo}/${total} ${(optionTwo/total*100).toFixed(2)}%)` }
                       </div>
                    </div>
     return diagram
@@ -48,7 +44,7 @@ class MyAnsweredQuestion extends React.Component{
                       `${question.optionTwo.text} than ${question.optionOne.text}`
                       } 
                       </div>
-                    { display && this.createDiagram(question)}
+                    { this.createDiagram(question)}
                     </div>
                 </div>
             

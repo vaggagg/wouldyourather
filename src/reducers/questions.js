@@ -1,4 +1,4 @@
-import {ADD_QUESTION,RECEIVE_QUESTIONS} from '../actions/questions'
+import {ADD_QUESTION,RECEIVE_QUESTIONS,ANSWER_QUESTION} from '../actions/questions'
 
 export default function questions (state = {}, action) {
     switch(action.type) {
@@ -8,10 +8,15 @@ export default function questions (state = {}, action) {
           ...action.questions
         }
       case ADD_QUESTION :
-       //some logic that must be added
-
         return {
-         //
+          ...state,
+          ...action.question
+        }
+      case ANSWER_QUESTION :
+        const { questions } = action
+        return{
+          ...state,
+          ...questions
         }
       default :
         return state

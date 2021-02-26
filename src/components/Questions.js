@@ -1,59 +1,31 @@
 import '../App.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { unstable_batchedUpdates } from 'react-dom';
+import UnansweredQuestions from './UnansweredQuestions';
 
 class Questions extends React.Component{
   state= {
-    display : false
+    display : false,
+    unansweredQuestions:[]
   }
-  createDiagram = (id) => { 
-    const  {optionOne,optionTwo,total} = this.props.percentages[id];
-    const isZeroOptionOne = optionOne == 0 ;
-    const isZeroOptionTwo = optionTwo == 0 ;
-    const widthOfOptionOne = {
-      width: optionOne/total * 100 + '%'
-    }
-    const widthOfOptionTwo = {
-      width: optionTwo/total * 100 + '%'
-    }
-    console.log(widthOfOptionOne)
-    const diagram = <div class='diagram' id={id}>
-                      <div class="OptionOne" style={widthOfOptionOne}>
-                       { !isZeroOptionOne && optionOne }
-                      </div>
-                      <div class="OptionTwo" style={widthOfOptionTwo}>
-                        { !isZeroOptionTwo && optionTwo}
-                      </div>
-                   </div>
-    return diagram
+  componentDidMount(){
+    this.setState({unansweredQuestions:[...this.props.unansweredQuestions]})
   }
   
   render(){
+    const {unansweredQuestions} = this.state;
 
-    const { questions, keys, percentages }=this.props
+    const { user,percentages}=this.props
     return(
-
-      <div class="Questions-sub">
-        <div class='Title'>
-          {keys.map(x=>
-            <div class='Question-box'>
-                <div class= "Question">
-                   <div class= "OptionOne">
-                      {x.optionOne.text}
-                    </div>
-                    <div class="Or">
-                      OR
-                    </div>
-                    <div class= "OptionTwo">
-                      {x.optionTwo.text}
-                    </div>
-                  </div>
-                  {this.createDiagram(x.id)}
+            <div>
+              <div class="Unanswered Questions-sub">
+                <div class='Title'></div>
+                  {unansweredQuestions.map(x=>
+                        <UnansweredQuestions question={x} percentage={percentages[x.id]} user= {user} />
+                    )}
               </div>
-            )}
-
-        </div>
-      </div>
+          </div>
 
     )}
 }
@@ -61,18 +33,21 @@ function mapStateToProps ({questions, autheduser}) {
   const { user } = autheduser;
   const keys=[];
   const percentages = {};
+  const unansweredQuestions = [];
   for(let key in questions){
     let value = questions[key];
-    keys.push(value)
+    let votes = [...value.optionOne.votes,...value.optionTwo.votes]
+    let questionVotedFromUser = votes.find(x=>x==user)
+    if(questionVotedFromUser == undefined)
+      unansweredQuestions.push(value)
     percentages[key]={ 
       'optionOne': value.optionOne.votes.length,
       'optionTwo': value.optionTwo.votes.length,
       'total': value.optionOne.votes.length + value.optionTwo.votes.length
     }
   }
-
   return {
-    keys, questions, percentages, user
+    percentages, user, unansweredQuestions
   }
 }
 
