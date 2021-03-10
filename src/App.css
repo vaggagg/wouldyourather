@@ -20,8 +20,26 @@ body{
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+.mainDashboard::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+.mainDashboard::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.mainDashboard::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+.Modal { width:100%; position: static; height: 100%; background-color: gray; opacity: 0.5; z-index:1; top:0; left:0;}
+.Question-box-Modal { background-color: white;  z-index: 100; width:400px; height:300px; }
+.link { text-decoration: none; color: black; }
+.avatar {width: 75px; height: 75px; border-radius: 50% ;}
 .AddQuestionContainer { width:80%; margin: 0 auto; }
-
+#Leaderboard{ width: 80%; }
+#Leaderboard tr { display: flex; }
+#Leaderboard th,td { width: 25%; text-align: center; }
 .AddQuestionContainer .input .row { margin-left: 10px;}
 .AddQuestionContainer .button-container { width:400px;}
 .Answered-Question { text-align: left; }
@@ -59,25 +77,28 @@ body{
 .diagram.notHovered { width: 0; }
 .diagram .OptionOne{  background-color: #6b0000; width:0; font-weight: 400;}
 .diagram .OptionTwo {  background-color: #826713; width: 0; font-weight: 400;}
-.Question-box { width: 50%; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; }
+.Question-box,.Score { width: 50%; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; }
+.Score { text-align: center; display: flex; }
+.Score .Name { font-weight: 700; padding-right: 10px; }
+.Score .Points { color: orange; padding-left:10px; padding-right: 10px; }
 .Subtitle { padding-bottom: 15px; padding-top: 15px; }
 .AddQuestionContainer .Title { text-align:center; font-weight: 700; font-size:22px;  }
 @media screen and (max-width: 1400px) {
-  .Question-box { width:60%; }
+  .Question-box,.Score { width:60%; }
 }
 @media screen and (max-width: 1200px) {
-  .Question-box { width:65%; }
+  .Question-box,.Score { width:65%; }
 }
 @media screen and (max-width: 1000px) {
-  .Question-box { width:80%; }
+  .Question-box,.Score { width:80%; }
 }
 @media screen and (max-width: 800px) {
-  .Question-box { width:90%; }
+  .Question-box,.Score { width:90%; }
 }
 @media screen and (max-width: 500px) {
-  .Question-box { width:100%; }
+  .Question-box,.Score { width:100%; }
 }
-
+.Avatar { width: 100px; height:100px; }
 .Question { width: 100%; margin: 0 auto; display: flex; }
 .Question .Or { font-size: 15px; width: 20%;  text-align: center;}
 .Question .OptionOne { text-align: right; color: #6b0000; }
@@ -89,7 +110,6 @@ body{
 .Titles a { text-decoration:none; padding: 10px; width: 20%; background-color: #dedede; font-size: 15px; text-align: center; border-bottom: 3px solid black; }
 .Titles a.selected { border-right: 2px solid black; border-left: 2px solid black; border-top: 2px solid black; border-bottom:none; background-color: white;}
 .wouldRatherBe{ font-size: 22px; text-align: center; font-weight: 700;}
-
 
 #Warning{
   animation: shake 0.5s;

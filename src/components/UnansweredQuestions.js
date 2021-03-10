@@ -1,13 +1,8 @@
 import '../App.css';
 import React, { Component } from 'react';
-import {
-  NavLink,
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
-
-class MyAnsweredQuestion extends React.Component{
+import { handleAnswerQuestion } from '../actions/questions';
+import { connect } from 'react-redux';
+class UnansweredQuestions extends React.Component{
   state= {
     display : false
   }
@@ -30,11 +25,11 @@ class MyAnsweredQuestion extends React.Component{
                    </div>
     return diagram
   }
-  handleHover=(question)=>{
+  
+  handleClick=(user, question, option )=>{
+    console.log(user)
+    this.props.dispatch(handleAnswerQuestion(user, question,option))
     this.setState({ display: true });
-  }
-  handleHoverOut=(question)=>{
-    this.setState({ display: false });
   }
   render(){
 
@@ -43,21 +38,28 @@ class MyAnsweredQuestion extends React.Component{
 
     return(
               <div class='Question-box'>
-                  <NavLink to={'/Dashboard/MyProfile/questions/' + question.id}>
-                  <div class= "Answered-Question" onMouseEnter= {this.handleHover} onMouseLeave= {this.handleHoverOut}>
-                    <div class= "Answer">
-                      I would rather {question.optionOne.votes.find(question=>question==user) !== undefined ? 
-                      `${question.optionOne.text }  than  ${question.optionTwo.text}` :
-                      `${question.optionTwo.text} than ${question.optionOne.text}`
-                      } 
+                  <div class= "Unanswered-Question">
+                  <div class='wouldRatherBe'>You would rather be</div>
+                    <div class= "Question">
+                      <div class="OptionOne" onClick={(e)=> this.handleClick(user, question, 'optionOne')}>
+                        {question.optionOne.text }
+                      </div>
+                     <div class='Or'> OR </div>
+                      <div class="OptionTwo" onClick={(e)=> this.handleClick(user, question, 'optionTwo')}>
+                      {question.optionTwo.text}
+                      </div>
                       </div>
                     { this.createDiagram(question)}
                     </div>
-                    </NavLink>
                 </div>
             
           )
     }
 }
-
-export default MyAnsweredQuestion;
+function mapStateToProps ({ users }) {
+ 
+  return {
+    users
+  }
+}
+export default connect(mapStateToProps)(UnansweredQuestions);

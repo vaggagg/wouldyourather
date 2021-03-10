@@ -3,7 +3,7 @@ let users = {
     id: 'sarahedo',
     name: 'Sarah Edo',
     password:'1234',
-    avatarURL: "",
+    avatarURL: "https://randomuser.me/api/portraits/women/74.jpg",
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionTwo',
@@ -16,7 +16,7 @@ let users = {
     id: 'tylermcginnis',
     name: 'Tyler McGinnis',
     password:'1234',
-    avatarURL: "",
+    avatarURL: "https://randomuser.me/api/portraits/men/75.jpg",
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -27,7 +27,7 @@ let users = {
     id: 'johndoe',
     name: 'John Doe',
     password:'1234',
-    avatarURL:"" ,
+    avatarURL:"https://randomuser.me/api/portraits/men/72.jpg" ,
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -39,7 +39,7 @@ let users = {
     id: 'Kate',
     name: 'kate',
     password:'1234',
-    avatarURL:"" ,
+    avatarURL:"https://randomuser.me/api/portraits/women/64.jpg" ,
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -51,7 +51,7 @@ let users = {
     id: 'Sarah',
     name: 'Sarah',
     password:'1234',
-    avatarURL:"" ,
+    avatarURL:"https://randomuser.me/api/portraits/women/44.jpg" ,
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -63,7 +63,7 @@ let users = {
     id: 'LOLtest',
     name: 'LolTest',
     password:'1234',
-    avatarURL:"" ,
+    avatarURL:"https://randomuser.me/api/portraits/men/65.jpg" ,
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -206,7 +206,7 @@ export function _saveQuestion (question) {
         }
       }
 
-      res(formattedQuestion)
+      res({questions,users})
     }, 1000)
   })
 }
@@ -248,7 +248,7 @@ export function _saveUser ( id,password ) {
       id:id,
       password:password,
       name: "",
-      avatarURL:"" ,
+      avatarURL:"https://randomuser.me/api/portraits/men/15.jpg" ,
       answers: {},
       questions: []
     }}
@@ -264,11 +264,18 @@ export function _saveUser ( id,password ) {
   })
 }
 
-export function _checkCredentials(id,password){
+export function _checkCredentials(user,passwordInput){
+  const  { id, password, avatarURL } = user
   return new Promise((res, rej) => {
     setTimeout(() => {
-      const result=password===users[id].password
-      res([result,id])
+      const result=passwordInput===password
+      res({
+        result: result,
+        user: {
+          id: id,
+          avatarURL:avatarURL
+        }
+      })
     }, 1000)
   })
 }

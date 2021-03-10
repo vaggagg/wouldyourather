@@ -42,7 +42,7 @@ handleSignIn=(event)=>{
 
   event.preventDefault();
 
-  this.props.dispatch(handleCheckCredentials( tempUsername , password ))
+  this.props.dispatch(handleCheckCredentials( tempUsername.id , password ))
 
 }
 passwordChange=(event)=>{
@@ -69,7 +69,7 @@ optionChange=(event)=>{
               <form onSubmit={this.handleSignIn}>
                 <div clas="droplist">
                   <select name="users" id="users" class="droplist" onChange={this.optionChange}>
-                    {ids.map(id=><option value={id}>{id}</option>)}
+                    {ids.map(id=><option value={id.name}>{id.name}</option>)}
                   </select>
                   </div>
                   <Input placeholder="Insert your password" type="password" onChange={this.passwordChange}/>
@@ -99,7 +99,13 @@ optionChange=(event)=>{
 
 function mapStateToProps ({ users }) {
   const usersArray=Object.keys(users)
-  const ids=usersArray.map((user)=>(users[user].id))
+  const ids = usersArray.map((user)=>(
+    {
+      id:users[user],
+      name:users[user].name,
+      avatarURL:users[user].avatarURL
+    })
+  )
   return {
     ids,
     users

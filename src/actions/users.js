@@ -44,7 +44,7 @@ export function handleCheckCredentials(id,password){
     return (dispatch, getState) => {
       dispatch(showLoading())
       return checkCredentials(id, password)
-        .then( ([result,returnedID]) => result ? dispatch(setAuthedUser(returnedID)):dispatch(FailedSignIn()) )
+        .then( ({result,user}) => result ? dispatch(setAuthedUser(user.id,user.avatarURL)):dispatch(FailedSignIn()) )
         .then(() => dispatch(hideLoading()))
         }
     }

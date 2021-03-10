@@ -5,12 +5,14 @@ import Home from './Home.js';
 import Questions from './Questions.js';
 import MyProfile from './MyProfile.js';
 import AddQuestions from './AddQuestions.js';
+import QuestionModal from './QuestionModal.js';
 import {
     NavLink,
     BrowserRouter as Router,
     Switch,
     Route
   } from "react-router-dom";
+import Leaderboard from './Leaderboard.js';
 class Dashboard extends React.Component {
 
 
@@ -24,7 +26,7 @@ class Dashboard extends React.Component {
                 <NavLink to="../Dashboard/Leaderboard" activeClassName="selected">
                     Leaderboard
                 </NavLink>
-                <NavLink to="../Dashboard/Questions" activeClassName="selected">
+                <NavLink to="../Dashboard/Unanswered-Questions" activeClassName="selected">
                      Unanswered Questions
                 </NavLink>
                 <NavLink to="../Dashboard/addQuestions" activeClassName="selected">
@@ -39,14 +41,24 @@ class Dashboard extends React.Component {
                         <Home />
                     </Route>
                     <Route path='/Dashboard/Leaderboard'>
-                        
+                        <Leaderboard />
                     </Route>
-                    <Route path='/Dashboard/Questions'>
+                    <Route path='/Dashboard/Unanswered-Questions'>
                         <Questions />
                     </Route>
                     <Route path='/Dashboard/addQuestions'>
                         <AddQuestions />
                     </Route>
+                    <Route exact path='/Dashboard/MyProfile'>
+                        <MyProfile />
+                    </Route>
+                    <Route exact path='/Dashboard/MyProfile/questions/:id' 
+                    render={({match}) =>
+                        <Fragment>
+                            <MyProfile />
+                            <QuestionModal type='answered' questionID={match.params.id} previousPath='/Dashboard/MyProfile/'/>
+                        </Fragment>
+                    }/>
                     <Route path='/Dashboard/MyProfile'>
                         <MyProfile />
                     </Route>

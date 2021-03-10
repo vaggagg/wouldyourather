@@ -1,12 +1,13 @@
 export const SET_AUTHED_USER = 'SET_AUTHED_USER'
 export const FAILED_SIGN_IN= 'FAILED_SIGN_IN'
 
-export function setAuthedUser (id) {
+export function setAuthedUser (id,avatarURL) {
   return {
     type: SET_AUTHED_USER,
     autheduser:{
       user:id,
-      failedSignIn:false
+      failedSignIn:false,
+      avatarURL: avatarURL
     }
   }
 }

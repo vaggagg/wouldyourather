@@ -9,16 +9,14 @@ class Welcome extends React.Component{
   componentWillMount(){
     setTimeout(()=>{
       this.props.openCurtains()
-    },1000)
+    },2000)
   }
   render(){
 
-    const { user }=this.props
+    const { user, avatarURL }=this.props
 
     return(
-
       <div class="Welcome css-typing"><p>Welcome { user }!</p></div>
-
     )}
 }
 function mapStateToProps ({autheduser}) {

@@ -29,7 +29,7 @@ export function handleAddQuestion(newQuestion){
         dispatch(showLoading())
     
         return saveQuestion(newQuestion)
-          .then((questions) => {
+          .then(({questions}) => {
               dispatch(addQuestion(questions)) })    
           .then(() => dispatch(hideLoading()))
       }

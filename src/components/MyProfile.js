@@ -49,7 +49,7 @@ class MyProfile extends React.Component{
             <div class='Question-box'>
                 <div class= "Question">
                    <div class= "OptionOne">
-                      {x.optionOne.text} {x.optionOne.votes.find(x=>x==user) && 'found'}
+                      {x.optionOne.text} 
                     </div>
                     <div class="Or">
                       OR
