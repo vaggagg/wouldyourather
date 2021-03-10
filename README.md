@@ -72,6 +72,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## About would you rather
 Would you rather is a game that asks you a question and presents you two options. Then , you should choose your preferred one and see the percentage of other users. In this version , you can login or create a user, ask question, reply to question and see how you compete against other players.
 
-##How to start playing
-In the project directory, you can run: ###npm install, then ###npm start
-A new localhost:3000 page should open now. Then navigate to ###localhost:3000/Login. You are now ready to play. Have fun :D
+## How to start playing
+In the project directory, you can run: ### npm install, then ### npm start
+A new localhost:3000 page should open now. Then navigate to ### localhost:3000/Login. You are now ready to play. Have fun :D
