@@ -1,4 +1,4 @@
-import {RECEIVE_USERS, ADD_USER,SIGN_IN, FAILED_SIGN_IN ,ANSWER_QUESTION_USER} from '../actions/users'
+import {RECEIVE_USERS, ADD_USER,ADD_QUESTION_USER,ANSWER_QUESTION_USER} from '../actions/users'
 
 export default function users (state = {}, action) {
     switch(action.type) {
@@ -12,6 +12,10 @@ export default function users (state = {}, action) {
         ...state,...action.user
       }
     case ANSWER_QUESTION_USER :
+    return {
+      ...state,...action.user
+    }
+    case ADD_QUESTION_USER :
     return {
       ...state,...action.user
     }

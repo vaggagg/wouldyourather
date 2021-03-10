@@ -22,7 +22,7 @@ class Questions extends React.Component{
               <div class="Unanswered Questions-sub">
                 <div class='Title'></div>
                   {unansweredQuestions.map(x=>
-                        <UnansweredQuestions question={x} percentage={percentages[x.id]} user= {user} />
+                      <div key={x.id}> <UnansweredQuestions question={x} percentage={percentages[x.id]} user= {user} /> </div>
                     )}
               </div>
           </div>

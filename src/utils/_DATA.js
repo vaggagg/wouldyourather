@@ -247,7 +247,7 @@ export function _saveUser ( id,password ) {
     const newUser={ [id]:{
       id:id,
       password:password,
-      name: "",
+      name: id,
       avatarURL:"https://randomuser.me/api/portraits/men/15.jpg" ,
       answers: {},
       questions: []
@@ -268,7 +268,7 @@ export function _checkCredentials(user,passwordInput){
   const  { id, password, avatarURL } = user
   return new Promise((res, rej) => {
     setTimeout(() => {
-      const result=passwordInput===password
+      const result = passwordInput === password
       res({
         result: result,
         user: {

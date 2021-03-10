@@ -1,7 +1,6 @@
 import '../App.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { unstable_renderSubtreeIntoContainer } from 'react-dom';
 import MyAnsweredQuestion from './MyAnsweredQuestion';
 
 class MyProfile extends React.Component{
@@ -33,14 +32,14 @@ class MyProfile extends React.Component{
   }
   render(){
 
-    const { questions, keys, percentages, createdQuestions, votedQuestions, user }=this.props;
+    const { percentages, createdQuestions, votedQuestions, user }=this.props;
 
     return(
 
       <div class="MyQuestions-sub">
         <div class='Title Answered-Questions'> <h1>My answered questions</h1>
           { votedQuestions.map((x)=> 
-              <MyAnsweredQuestion question={x} percentage={percentages[x.id]} user= {user} />
+            <div key={x.id}> <MyAnsweredQuestion question={x} percentage={percentages[x.id]} user= {user} /> </div>
           )}
         </div>
 

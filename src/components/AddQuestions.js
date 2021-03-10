@@ -27,21 +27,21 @@ handleSubmit = (e) =>{
 
     return(
               
-        <div class="AddQuestionContainer">
-            <div class="Title">
+        <div className="AddQuestionContainer">
+            <div className="Title">
                 Create your Question
             </div>
         <form onSubmit={this.handleSubmit}>
-            <div class="Subtitle">Would you rather</div>
+            <div className="Subtitle">Would you rather</div>
 
           <Input placeholder="Insert your first choice" type="text" onChange={this.OptionOne}/>
-          <div class="Subtitle">Or</div>
+          <div className="Subtitle">Or</div>
           <Input placeholder="Insert your second choice" type="text" onChange={this.OptionTwo}/>
-          <div class="button-container">
-            <button class="Button">Sign up</button>
+          <div className="button-container">
+            <button className="Button">Add Question</button>
           </div>
         </form>
-       { this.state.SuccessDisplay && <div class="GreenColor"> Addition of question was succeed. </div> }
+       { this.state.SuccessDisplay && <div className="GreenColor"> Addition of question was succeed. </div> }
         </div>
     )}
 }

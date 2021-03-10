@@ -6,72 +6,93 @@ import Questions from './Questions.js';
 import MyProfile from './MyProfile.js';
 import AddQuestions from './AddQuestions.js';
 import QuestionModal from './QuestionModal.js';
+import LoginAgain from './LoginAgain.js';
 import {
+    Redirect,
     NavLink,
     BrowserRouter as Router,
     Switch,
     Route
   } from "react-router-dom";
 import Leaderboard from './Leaderboard.js';
-class Dashboard extends React.Component {
+function Dashboard (props) {
 
-
-    render() {
+const { questionIDS} = props;
         return (
-            <div className= "mainDashboard">
-                <div className="Titles">
-                <NavLink to="../Dashboard/Home" activeClassName="selected">
-                    Dashboard
-                </NavLink>
-                <NavLink to="../Dashboard/Leaderboard" activeClassName="selected">
-                    Leaderboard
-                </NavLink>
-                <NavLink to="../Dashboard/Unanswered-Questions" activeClassName="selected">
-                     Unanswered Questions
-                </NavLink>
-                <NavLink to="../Dashboard/addQuestions" activeClassName="selected">
-                    Add Questions
-                </NavLink>
-                <NavLink to="../Dashboard/Myprofile" activeClassName="selected">
-                    My Profile
-                </NavLink>
-                </div>
-                <Switch>
-                    <Route path='/Dashboard/Home'>
-                        <Home />
-                    </Route>
-                    <Route path='/Dashboard/Leaderboard'>
-                        <Leaderboard />
-                    </Route>
-                    <Route path='/Dashboard/Unanswered-Questions'>
-                        <Questions />
-                    </Route>
-                    <Route path='/Dashboard/addQuestions'>
-                        <AddQuestions />
-                    </Route>
-                    <Route exact path='/Dashboard/MyProfile'>
-                        <MyProfile />
-                    </Route>
-                    <Route exact path='/Dashboard/MyProfile/questions/:id' 
-                    render={({match}) =>
-                        <Fragment>
+            <div>
+                {
+                    props.user===null && <LoginAgain />
+                }
+                {   props.user!== null &&
+                <div className= "mainDashboard">
+                    <div className="Titles">
+                    <NavLink to="../Dashboard/Home" activeClassName="selected">
+                        Home Page
+                    </NavLink>
+                    <NavLink to="../Dashboard/Leaderboard" activeClassName="selected">
+                        Leaderboard
+                    </NavLink>
+                    <NavLink to="../Dashboard/Unanswered-Questions" activeClassName="selected">
+                        Unanswered Questions
+                    </NavLink>
+                    <NavLink to="../Dashboard/addQuestions" activeClassName="selected">
+                        Add Questions
+                    </NavLink>
+                    <NavLink to="../Dashboard/Myprofile" activeClassName="selected">
+                        My Profile
+                    </NavLink>
+                    </div>
+                    <Switch>
+                        <Route exact path='/Dashboard/Home'>
+                            <Home />
+                        </Route>
+                        <Route exact path='/Dashboard/Leaderboard'>
+                            <Leaderboard />
+                        </Route>
+                        <Route exact path='/Dashboard/Unanswered-Questions'>
+                            <Questions />
+                        </Route>
+                        <Route exact path='/Dashboard/addQuestions'>
+                            <AddQuestions />
+                        </Route>
+                        <Route exact path='/Dashboard/MyProfile'>
                             <MyProfile />
-                            <QuestionModal type='answered' questionID={match.params.id} previousPath='/Dashboard/MyProfile/'/>
-                        </Fragment>
-                    }/>
-                    <Route path='/Dashboard/MyProfile'>
-                        <MyProfile />
-                    </Route>
-                </Switch>
+                        </Route>
+                        <Route exact path='/Dashboard/MyProfile/questions/:id' 
+                        render={({match}) =>
+                            <Fragment>
+                                {questionIDS.find(x=>x===match.params.id)===undefined && <LoginAgain error='404'/>}
+                                {questionIDS.find(x=>x===match.params.id)!==undefined &&
+                                    <div>
+                                    <MyProfile /> 
+                                    <QuestionModal type='answered' questionID={match.params.id} previousPath='/Dashboard/MyProfile/'/>
+                                    </div> }
+                            </Fragment>
+                        }/>
+                        <Route exact path='/Dashboard/MyProfile'>
+                            <MyProfile />
+                        </Route>
+                        <Route exact path='/Dashboard/Home/questions/:id' 
+                        render={({match}) =>
+                            <Fragment>
+                                <Home />
+                                <QuestionModal type='unanswered' questionID={match.params.id} previousPath='/Dashboard/Home/'/>
+                            </Fragment>
+                        }/>
+                    </Switch>
+                </div>}
             </div>
         )
-    }
 
 }
-function mapStateToProps ({autheduser}) {
+function mapStateToProps ({autheduser, questions}) {
     const { user, failedSignIn } = autheduser
+    const questionIDS = []
+    for(let key in questions){
+         questionIDS.push(key)
+    }
     return {
-       user,failedSignIn
+       user,failedSignIn,questionIDS
     }
   }
 export default connect(mapStateToProps)(Dashboard)

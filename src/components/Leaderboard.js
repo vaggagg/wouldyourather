@@ -17,7 +17,7 @@ function Leaderboard (props){
                             <th>Total</th>
                     </tr>
                    {sortedUsers_Answers.map( x=>
-                   <div>
+                   <div key={x.user}>
                         <tr>
                             <td><img class="avatar" src={x.avatar}></img></td>
                             <td>{x.user}</td>
@@ -55,7 +55,6 @@ function mapStateToProps ({users}) {
             Users_Answers.push( scoreOfUser )
             }
     const sortedUsers_Answers = Users_Answers.sort( (a,b) => { return b.totalPoints-a.totalPoints }  )
-    console.log(Users_Answers)
     return {
         sortedUsers_Answers
     }

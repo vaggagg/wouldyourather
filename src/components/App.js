@@ -3,11 +3,14 @@ import logo from './images/logo.png';
 import Form from './Form';
 import Welcome from './Welcome.js';
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, useHistory,Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, useHistory,Redirect, Switch } from 'react-router-dom';
+import { Logout } from '../actions/authedUser.js';
 import { connect } from 'react-redux';
 import { handleInitialData } from '../actions/shared';
 import LoadingBar from 'react-redux-loading';
 import Dashboard from './Dashboard';
+import { NavLink } from "react-router-dom";
+import LoginAgain from './LoginAgain';
 
 
 class App extends Component {
@@ -32,12 +35,14 @@ class App extends Component {
     this.forceUpdate();
 
   }
-  changeHistoryFromComponents=()=>{
-    
+  handleLogout =()=>{
+    this.props.dispatch(Logout());
+    this.setState({ active: "", curtainsOpen : false , clickedLogOut : true})
+    return <Redirect to="/Login" />
   }
   render() {
-  const { user, failedSignIn } = this.props
-  const {active,curtainsOpen} = this.state 
+  const { user, failedSignIn ,avatarURL} = this.props
+  const {active,curtainsOpen,clickedLogOut} = this.state 
   const loggedUser = user===null ? true : false ;
   const Sign_In_Failed = failedSignIn === true ? true : false
   return (
@@ -45,20 +50,29 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           <div className="header-container">
-            <div className="header"><img src={logo}/></div>
+            <div className="header"><NavLink to="../Login"> <img src={logo}/></NavLink> </div>
+           { user!==null && <div><div class='connected-user'> Connected as {user},<div class='logout' onClick={this.handleLogout}>Logout</div></div><img class=' connected-avatar avatar' src = {avatarURL}/> </div> }
           </div>
           <div class={"Curtain BlueColor "+ active } />
           <div class={"Curtain RedColor "+ active } />
           <div className='container'>
               <div>
-                  <Route path='/Login' exact>
+                <Switch>
+
+                  <Route exact path='/Login' exact>
                     { loggedUser && <Form reRenderParent={ this.reRenderParent } failed={Sign_In_Failed }/> }
                     { !loggedUser && <Welcome openCurtains={ this.curtainEffect }/> }
-                    { !loggedUser&& curtainsOpen && <Redirect to="/Dashboard" />}
+                    { !loggedUser&& curtainsOpen && <Redirect to="/Dashboard/Home" />}
                   </Route>
+
                   <Route path='/Dashboard' >
-                  <Dashboard />
+                    <Dashboard />
                   </Route>
+
+                  <Route path='/'>
+                    <LoginAgain error='404' />
+                  </Route>
+              </Switch>
               </div>
           </div>
         </Fragment>
@@ -66,14 +80,10 @@ class App extends Component {
     )
   }
 }
-//<Nav />
-//<Route path='/Questions/:id' component={AnswerQuestions} />
-//<Route path='/add' component={AddQuestions} />
-//<Route path='/leaderboard' component={Leaderboard} />
 function mapStateToProps ({autheduser}) {
-  const { user, failedSignIn } = autheduser
+  const { user,avatarURL, failedSignIn } = autheduser
   return {
-     user,failedSignIn
+     user,failedSignIn,avatarURL
   }
 }
 

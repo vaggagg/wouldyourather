@@ -30,19 +30,14 @@ handleSignUp=(event)=>{
 handleSignIn=(event)=>{
 
   const {username,password}=this.state;
-
-  let tempUsername=username;
-
-  if(username===""){
-
+let tempUsername;
+  if(username==="")
     tempUsername=this.props.ids[0]
-
-
-  }
-
+  else
+  tempUsername = this.props.ids.find(x=>x.name===username)
   event.preventDefault();
 
-  this.props.dispatch(handleCheckCredentials( tempUsername.id , password ))
+  this.props.dispatch(handleCheckCredentials( tempUsername , password ))
 
 }
 passwordChange=(event)=>{
@@ -68,8 +63,8 @@ optionChange=(event)=>{
               { this.props.failed&&<div id="Warning">Sign in failed</div> }
               <form onSubmit={this.handleSignIn}>
                 <div clas="droplist">
-                  <select name="users" id="users" class="droplist" onChange={this.optionChange}>
-                    {ids.map(id=><option value={id.name}>{id.name}</option>)}
+                  <select name="users" id="users" className="droplist" onChange={this.optionChange}>
+                    {ids.map(id=><option key={id.name} value={id.name}>{id.name}</option>)}
                   </select>
                   </div>
                   <Input placeholder="Insert your password" type="password" onChange={this.passwordChange}/>
@@ -101,8 +96,9 @@ function mapStateToProps ({ users }) {
   const usersArray=Object.keys(users)
   const ids = usersArray.map((user)=>(
     {
-      id:users[user],
+      id:user,
       name:users[user].name,
+      password: users[user].password,
       avatarURL:users[user].avatarURL
     })
   )

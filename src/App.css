@@ -32,8 +32,17 @@ body{
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
-.Modal { width:100%; position: static; height: 100%; background-color: gray; opacity: 0.5; z-index:1; top:0; left:0;}
-.Question-box-Modal { background-color: white;  z-index: 100; width:400px; height:300px; }
+a { text-decoration: none;}
+.errorLogo { text-align:center; }
+.errorLogo img {width: 50%; height: 30%; }
+.Logout-Text { color: white; font-size: 25px; }
+.connected-avatar { position: absolute; right: 0; }
+.logout { color: yellow; cursor: pointer; }
+.connected-user { color:white; position:absolute; right: 100px; top: 20px;   }
+.creator { float:right; }
+.Home .Question { padding: 10px 0px; }
+.Modal { width:100%; position: absolute; height: 100%; background-color: rgba(127, 128, 110,0.5); z-index:1; top:0; left:0;}
+.Question-box-Modal { background-color: white;  z-index: 100; width:60%; height:150px; position: absolute;top: 50%;left: 50%;-moz-transform: translateX(-50%) translateY(-50%);-webkit-transform: translateX(-50%) translateY(-50%);transform: translateX(-50%) translateY(-50%);}
 .link { text-decoration: none; color: black; }
 .avatar {width: 75px; height: 75px; border-radius: 50% ;}
 .AddQuestionContainer { width:80%; margin: 0 auto; }
@@ -42,7 +51,7 @@ body{
 #Leaderboard th,td { width: 25%; text-align: center; }
 .AddQuestionContainer .input .row { margin-left: 10px;}
 .AddQuestionContainer .button-container { width:400px;}
-.Answered-Question { text-align: left; }
+.Answered-Question { text-align: left; font-weight:500; color: black; }
 .Button{  width:60%;  height:50px;    text-align:center;  background-color:black;  color:#fff;  border-radius:30px;}
 .Button.redBg{  background-color:#aa1111;  color:#00ffff;}
 .Button.redBg:hover{  background-color:#6e0505;}
@@ -100,7 +109,7 @@ body{
 }
 .Avatar { width: 100px; height:100px; }
 .Question { width: 100%; margin: 0 auto; display: flex; }
-.Question .Or { font-size: 15px; width: 20%;  text-align: center;}
+.Question .Or { font-size: 15px; width: 20%;  text-align: center; color: black; }
 .Question .OptionOne { text-align: right; color: #6b0000; }
 .Question .OptionOne:hover { background-color: #6b0000; color: white; cursor: pointer; }
 .Question .OptionTwo:hover { background-color: #826713; color: white; cursor: pointer;}

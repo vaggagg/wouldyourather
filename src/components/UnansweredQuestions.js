@@ -27,7 +27,6 @@ class UnansweredQuestions extends React.Component{
   }
   
   handleClick=(user, question, option )=>{
-    console.log(user)
     this.props.dispatch(handleAnswerQuestion(user, question,option))
     this.setState({ display: true });
   }
