@@ -3,37 +3,13 @@ import React, { Component } from 'react';
 import { handleAnswerQuestion } from '../actions/questions';
 import { connect } from 'react-redux';
 class UnansweredQuestions extends React.Component{
-  state= {
-    display : false
-  }
-  createDiagram = (question) => { 
-    const { id } = question;
-    const  {optionOne,optionTwo,total} = this.props.percentage;
-    const isZeroOptionOne = optionOne == 0 ;
-    const isZeroOptionTwo = optionTwo == 0 ;
-    const widthOfOptionOne = { width: optionOne/total * 100 + '%'}
-    const widthOfOptionTwo = { width: optionTwo/total * 100 + '%'}
-    const widthOfDiagram = this.state.display ? 'hovered' : 'notHovered'
-   
-    const diagram = <div class={ 'diagram '+ widthOfDiagram} id={id}>
-                      <div class="OptionOne" style={widthOfOptionOne}>
-                       {!isZeroOptionOne &&question.optionOne.text +`(${optionOne}/${total} ${(optionOne/total*100).toFixed(2)}%)` }
-                      </div>
-                      <div class="OptionTwo" style={widthOfOptionTwo}>
-                      {!isZeroOptionTwo && question.optionTwo.text +`(${optionTwo}/${total} ${(optionTwo/total*100).toFixed(2)}%)` }
-                      </div>
-                   </div>
-    return diagram
-  }
   
   handleClick=(user, question, option )=>{
     this.props.dispatch(handleAnswerQuestion(user, question,option))
-    this.setState({ display: true });
   }
   render(){
 
-    const {question , percentage, user}=this.props;
-    const { display } = this.state;
+    const { question , percentage, user }=this.props;
 
     return(
               <div class='Question-box'>
@@ -48,7 +24,6 @@ class UnansweredQuestions extends React.Component{
                       {question.optionTwo.text}
                       </div>
                       </div>
-                    { this.createDiagram(question)}
                     </div>
                 </div>
             

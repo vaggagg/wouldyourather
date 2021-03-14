@@ -41,7 +41,6 @@ class QuestionModal extends React.Component{
     const { redirectBack } = this.state;
     const {  questions, allQuestions, type} = this.props;
     const idOfQuestion = this.props.questionID;
-    console.log(userAnswers)
     const typeOfQuestion = userAnswers.find(x=>x===idOfQuestion) !== undefined? 'answered' : 'unanswered';
     const question = questions[idOfQuestion];
     const questionHome = allQuestions[idOfQuestion];

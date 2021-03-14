@@ -83,12 +83,7 @@ a { text-decoration: none;}
 .header img {  background-color: transparent; margin:auto 0; width: 200px;}
 .diagram { width: 100%; float:left;  height:20px; display: flex; margin: 0 auto; color: white;}
 .diagram.hovered { width: 100%; transition: width 2s; }
-.Unanswered .diagram.hovered { width: 100%; transition: width 2s; }
 .diagram.notHovered { width: 0; }
-.diagram.notHovered .OptionOne { display: none;}
-.diagram.notHovered .OptionTwo { display: none; }
-.diagram.hovered .OptionOne { display: inline-block;}
-.diagram.hovered .OptionTwo { display: inline-block; }
 .diagram .OptionOne{  background-color: #6b0000; width:0; font-weight: 400;}
 .diagram .OptionTwo {  background-color: #826713; width: 0; font-weight: 400;}
 .Question-box,.Score { width: 50%; margin: 0 auto; margin-top: 20px; margin-bottom: 20px; }
