@@ -59,7 +59,7 @@ class App extends Component {
           <div className='container'>
               <div>
                 <Switch>
-
+                  
                   <Route exact path='/Login' exact>
                     { loggedUser && <Form reRenderParent={ this.reRenderParent } failed={Sign_In_Failed }/> }
                     { !loggedUser && <Welcome openCurtains={ this.curtainEffect }/> }
@@ -69,7 +69,7 @@ class App extends Component {
                   <Route path='/Dashboard' >
                     <Dashboard />
                   </Route>
-
+                  {this.props.user!== null &&
                   <Route exact path='/questions/:id' 
                         render={({match, location}) =>
                             <Fragment>
@@ -79,12 +79,14 @@ class App extends Component {
                                     <QuestionModal questionID={match.params.id} location ={location}/>
                                     </div> }
                             </Fragment>
-                        }/>
+                        }/>}
 
                   <Route path='/'>
                     <LoginAgain error='404' />
                   </Route>
+                  
               </Switch>
+             }
               </div>
           </div>
         </Fragment>
