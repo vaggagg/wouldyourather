@@ -86,7 +86,6 @@ class App extends Component {
                   </Route>
                   
               </Switch>
-             }
               </div>
           </div>
         </Fragment>
